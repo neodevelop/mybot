@@ -16,6 +16,9 @@ defmodule Bastion.MessageHandler do
   end
 
   defp send_button_message(recipient, text, buttons) do
+    Logger.info "Recipient:\n#{inspect recipient}"
+    Logger.info "Text:\n#{inspect text}"
+    Logger.info "Buttons:\n#{inspect buttons}"
     payload = %{
       recipient: %{id: recipient},
       message: %{
@@ -30,7 +33,7 @@ defmodule Bastion.MessageHandler do
     url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
     Logger.info "Facebook URL:\n#{inspect url}"
     Logger.info "payload:\n#{inspect payload}"
-    headers = [{"Content-Type", "application/json"}]
-    HTTPoison.post!(url, Poison.encode!(payload), headers)
+    headers = [{"Content-Type", "applicatio/json"}]
+    Httpoison.post!(url, Poison.encode!(payload), headers)
   end
 end
