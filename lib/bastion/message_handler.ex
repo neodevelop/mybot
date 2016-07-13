@@ -34,6 +34,6 @@ defmodule Bastion.MessageHandler do
     Logger.info "Facebook URL:\n#{inspect url}"
     Logger.info "payload:\n#{inspect payload}"
     headers = [{"Content-Type", "applicatio/json"}]
-    Httpoison.post!(url, Poison.encode!(payload), headers)
+    HTTPoison.post!(url, Poison.encode!(payload), headers)
   end
 end
