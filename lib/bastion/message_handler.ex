@@ -22,11 +22,13 @@ defmodule Bastion.MessageHandler do
     payload = %{
       recipient: %{id: recipient},
       message: %{
-        type: "template",
-        payload: %{
-          template_type: "button",
-          text: text,
-          buttons: buttons
+        attachment: %{
+          type: "template",
+          payload: %{
+            template_type: "button",
+            text: text,
+            buttons: buttons
+          }
         }
       }
     }
