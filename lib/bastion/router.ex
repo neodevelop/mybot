@@ -15,6 +15,19 @@ defmodule Bastion.Router do
     end
   end
 
+  post "/webhook" do
+    {:ok, body, conn} = Plug.Conn.read_body(conn)
+
+    body
+    |> Poison.Parser.parse!(keys: :atoms)
+    |> Map.get(:entry)
+    |> hd()
+    |> Mao.get(:messaging)
+    |> Enum.each(&Bastion.MessageHandler.handle/1)
+
+    send_resp(conn, 200, "Message received")
+  end
+
   match _ do
     send_resp(conn, 404, "404 - Page not found")
   end
