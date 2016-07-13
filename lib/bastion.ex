@@ -5,7 +5,7 @@ defmodule Bastion do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(Bastion.Server, [System.get_env('PORT')])
+      worker(Bastion.Server, [System.get_env("PORT")])
     ]
 
     opts = [strategy: :one_for_one, name: Bastion.Supervisor]
