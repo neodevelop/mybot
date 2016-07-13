@@ -22,7 +22,7 @@ defmodule Bastion.Router do
     |> Poison.Parser.parse!(keys: :atoms)
     |> Map.get(:entry)
     |> hd()
-    |> Mao.get(:messaging)
+    |> Map.get(:messaging)
     |> Enum.each(&Bastion.MessageHandler.handle/1)
 
     send_resp(conn, 200, "Message received")
