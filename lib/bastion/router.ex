@@ -5,7 +5,7 @@ defmodule Bastion.Router do
   plug :match
   plug :dispatch
 
-  get '/webhook' do
+  get "/webhook" do
     conn = Plug.Conn.fetch_query_params(conn)
 
     if conn.params['hub.verify_token'] == 'secret-token' do
