@@ -17,6 +17,11 @@ defmodule Bastion.Router do
 
   post "/webhook" do
     {:ok, body, conn} = Plug.Conn.read_body(conn)
+    IO.puts "***********************"
+    IO.puts body
+    IO.puts "***********************"
+    IO.inspect conn
+    IO.puts "-----------------------"
 
     body
     |> Poison.Parser.parse!(keys: :atoms)
