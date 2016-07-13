@@ -35,7 +35,7 @@ defmodule Bastion.MessageHandler do
     url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
     Logger.info "Facebook URL:\n#{inspect url}"
     Logger.info "payload:\n#{inspect payload}"
-    headers = [{"Content-Type", "applicatio/json"}]
+    headers = [{"Content-Type", "application/json"}]
     HTTPoison.post!(url, Poison.encode!(payload), headers)
   end
 end
