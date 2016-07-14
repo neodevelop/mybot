@@ -11,14 +11,25 @@ defmodule Bastion.MessageHandler do
     send_button_message(msg.sender.id, "Choose from the following options", buttons)
   end
 
+  def handle(msg = %{postback: %{payload: "PB_NAME"}}) do
+    send_text_message(msg.sender.id, "We're MakingDevs, we're MakingBots")
+  end
+
   def handle(msg) do
     Logger.info "Unhandled message:\n#{inspect msg}"
   end
 
+  defp send_text_message(recipient, text) do
+    payload = %{
+      recipient: %{ id: recipient },
+      message: %{ text: text }
+    }
+    url = "https://graph.facebook.com/v2.6/me/messages?access_token=#{@fb_page_access_token}"
+    headers = [{"Content-Type", "application/json"}]
+    HTTPoison.post!(url, Poison.encode!(payload), headers)
+  end
+
   defp send_button_message(recipient, text, buttons) do
-    Logger.info "Recipient:\n#{inspect recipient}"
-    Logger.info "Text:\n#{inspect text}"
-    Logger.info "Buttons:\n#{inspect buttons}"
     payload = %{
       recipient: %{
         id: recipient
