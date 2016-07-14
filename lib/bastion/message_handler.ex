@@ -6,7 +6,7 @@ defmodule Bastion.MessageHandler do
   def handle(msg = %{message: %{text: _text}}) do
     buttons = [
       %{type: "postback", title: "Your name", payload: "PB_NAME"},
-      %{type: "web_url", title: "Your website", payload: "https://playoverwatch.com/en-us/heroes/bastion/"}
+      %{type: "web_url", title: "Your website", url: "https://playoverwatch.com/en-us/heroes/bastion/"}
     ]
     send_button_message(msg.sender.id, "Choose from the following options", buttons)
   end
@@ -20,7 +20,9 @@ defmodule Bastion.MessageHandler do
     Logger.info "Text:\n#{inspect text}"
     Logger.info "Buttons:\n#{inspect buttons}"
     payload = %{
-      recipient: %{id: recipient},
+      recipient: %{
+        id: recipient
+      },
       message: %{
         attachment: %{
           type: "template",
